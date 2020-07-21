@@ -3,7 +3,7 @@ import cors from "cors";
 import morgan from "morgan";
 require('dotenv').config(); // Get env variable
 import initializeRoutes from "./routes/initializeRoutes"; // routes
-import { mongooseConnection } from "./utils/dbConnection";//Mongo
+import { mongooseConnection } from "./utils/dbConnection"; // Mongo
 
 // Initialize
 export const app = express(); // Create Server
@@ -27,10 +27,13 @@ app.use(
 
 // Routes
 initializeRoutes(app);
-//DB Connection
+// DB Connection
 mongooseConnection(process.env.MONGODB_URI);
 
 app.get("/*", (req: Request, res: Response) => {
+    res.status(404).send("URL NOT FOUND");
+});
+app.post("/*", (req: Request, res: Response) => {
     res.status(404).send("URL NOT FOUND");
 });
 

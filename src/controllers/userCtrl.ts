@@ -19,10 +19,9 @@ export const addUser = async (req: Request, res: Response): Promise<Response | v
         const { data: userData, error: UserError } = await promiseWrapper(
             newUser.save()
         ); // Save new user
-
-        if (UserError) throw {status: 400, message: UserError};    
+        if (UserError) throw {status: 400, message: UserError.message};
         return res.status(200).json({ message: "User Added" });
-        
+
     } catch (error) {
         errorHandler(error, req, res);
     }
