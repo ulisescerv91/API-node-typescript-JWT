@@ -2,6 +2,7 @@ import { Request, Response } from "express";
 import { default as User } from "../models/User";
 
 import { promiseWrapper } from "../utils/promiseWrapper";
+import { errorHandler } from "../utils/errorHandle";
 
 // Authentication
 export const addUser = async (req: Request, res: Response): Promise<Response | void> => {
@@ -23,7 +24,7 @@ export const addUser = async (req: Request, res: Response): Promise<Response | v
         return res.status(200).json({ message: "User Added" });
         
     } catch (error) {
-
+        errorHandler(error, req, res);
     }
 
 
